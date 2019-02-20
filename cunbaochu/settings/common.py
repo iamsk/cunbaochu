@@ -40,7 +40,8 @@ INSTALLED_APPS = (
     'rest_framework',
     'rest_framework_swagger',
     'django_extensions',
-    'applications.crawler'
+    'applications.crawler',
+    'applications.web',
 )
 
 MIDDLEWARE_CLASSES = (
