@@ -1,2 +1,7 @@
 *.pyc
 env
+!static/css
+!static/js
+!static/img
+!static/device-mockups
+static/*
