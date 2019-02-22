@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'rest_framework_swagger',
     'django_extensions',
+    'django_elasticsearch_dsl',
     'applications.crawler',
     'applications.web',
 )
@@ -106,3 +107,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR + '/../static/'
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'https://search-cunbaochu-po2sbnoo2bqqifuxbqkyysrixa.ap-southeast-1.es.amazonaws.com/'
+    },
+}

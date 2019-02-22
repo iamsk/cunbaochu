@@ -16,12 +16,14 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from rest_framework_swagger.views import get_swagger_view
 
-from applications.web.views import IndexView
+from applications.web import views
 
 schema_view = get_swagger_view(title='cunbaochu API')
 
 urlpatterns = [
-    url(r'^$', IndexView.as_view()),
+    url(r'^$', views.IndexView.as_view()),
+    url(r'^search/$', views.PointsViewSet.as_view()),
+    url(r'^points/(?P<pk>[0-9]+)/$', views.PointView.as_view()),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^docs/$', schema_view)
 ]
