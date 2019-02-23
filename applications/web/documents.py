@@ -25,7 +25,10 @@ class PointDocument(DocType):
     #     analyzer=address_analyzer,
     #     fields={'raw': fields.KeywordField()}
     # )
-    location = fields.GeoPoint(lat_lon=True)
+    location = fields.GeoPointField()
+
+    def prepare_location(self, instance):
+        return {"lat": instance.latitude, "lon": instance.longitude}
 
     class Meta:
         model = Point  # The model associated with this DocType

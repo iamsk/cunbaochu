@@ -21,12 +21,10 @@ class NearByView(TemplateView):
         context['city'] = self.kwargs.get('city', u'附近')
         longitude = self.kwargs.get('longitude', '116.232922')
         latitude = self.kwargs.get('latitude', '39.542637')
-        s = PointDocument.search().filter('geo_distance', distance='10000m',
-                                          location={"lat": longitude, "lon": latitude})
-        a = s.execute()[0]
-        print a
-        print a.address
-        context['points'] = []
+        s = PointDocument.search().filter('geo_distance', distance='1000000m',
+                                          location={"lat": latitude, "lon": longitude})[:10]
+        points = s.execute()
+        context['points'] = points
         return context
 
 

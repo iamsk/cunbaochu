@@ -22,43 +22,23 @@
     <!-- Page Content -->
     <div class="container">
 
-      <h1 class="font-weight-light text-center mt-4 mb-0">{{ nearby }}</h1>
+      <h1 class="font-weight-light text-center mt-4 mb-0">{{ city }}</h1>
 
       <hr class="mt-2 mb-5">
 
       <div class="row text-center">
-
+        {% for point in points %}
         <div class="col-lg-3 col-md-4 col-6">
-          <a href="#" class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/pWkk7iiCoDM/400x300" alt="">
-              </a>
+          <!--<img class="img-fluid img-thumbnail" src="https://source.unsplash.com/pWkk7iiCoDM/400x20" alt="">-->
+          <p>
+          <span>{{ point.name }}</span><br>
+          <span>{{ point.address }}</span><br>
+          <span>{{ point.linkman }}</span><br>
+          <span>{{ point.telephone }}</span><br>
+          <span>{{ point.service_time }}</span>
+          </p>
         </div>
-        <div class="col-lg-3 col-md-4 col-6">
-          <a href="#" class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/aob0ukAYfuI/400x300" alt="">
-              </a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-6">
-          <a href="#" class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/EUfxH-pze7s/400x300" alt="">
-              </a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-6">
-          <a href="#" class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/M185_qYH8vg/400x300" alt="">
-              </a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-6">
-          <a href="#" class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/sesveuG_rNo/400x300" alt="">
-              </a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-6">
-          pass
-        </div>
-        <div class="col-lg-3 col-md-4 col-6">
-          pass
-        </div>
+        {% endfor %}
       </div>
 
     </div>
