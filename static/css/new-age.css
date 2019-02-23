@@ -53,7 +53,7 @@ p {
 }
 
 section {
-  padding: 100px 0;
+  padding: 20px 0;
 }
 
 section h2 {
@@ -381,7 +381,7 @@ footer {
 }
 
 footer p {
-  font-size: 12px;
+  font-size: 14px;
   margin: 0;
 }
 
@@ -390,7 +390,7 @@ footer ul {
 }
 
 footer ul li a {
-  font-size: 12px;
+  font-size: 14px;
   color: rgba(255, 255, 255, 0.3);
 }
 

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block css %}
+<style type="text/css">
+@media (min-width: 992px) {
+  header.masthead {
+    height: 5vh;
+    min-height: 60px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+</style>
+{% endblock %}
+{% block container %}
+  <header class="masthead">
+    <div class="container h-100">
+      <div class="row h-100">
+      </div>
+    </div>
+  </header>
+  <section id="cities">
+    <!-- Page Content -->
+    <div class="container">
+
+      <h1 class="font-weight-light text-center mt-4 mb-0">{{ city }}</h1>
+
+      <hr class="mt-2 mb-5">
+
+      <div class="row text-center">
+        {% for point in points %}
+        <div class="col-lg-3 col-md-4 col-6">
+          <!--<img class="img-fluid img-thumbnail" src="https://source.unsplash.com/pWkk7iiCoDM/400x20" alt="">-->
+          <p>
+          <span>{{ point.name }}</span><br>
+          <span>{{ point.address }}</span><br>
+          <span>{{ point.linkman }}</span><br>
+          <span>{{ point.telephone }}</span><br>
+          <span>{{ point.service_time }}</span>
+          </p>
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
+    <!-- /.container -->
+  </section>
+{% endblock %}
