@@ -3,12 +3,12 @@ from __future__ import unicode_literals
 
 from rest_framework import serializers
 
-from applications.crawler.models import RawPoint
+from applications.web.models import Point
 
 
-class RawPointSerializer(serializers.ModelSerializer):
+class PointSerializer(serializers.ModelSerializer):
     class Meta:
-        model = RawPoint
+        model = Point
         fields = [
             'address',
         ]

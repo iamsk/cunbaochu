@@ -21,10 +21,11 @@ address_analyzer = analyzer(
 
 @point.doc_type
 class PointDocument(DocType):
-    address = fields.TextField(
-        analyzer=address_analyzer,
-        fields={'raw': fields.KeywordField()}
-    )
+    # address = fields.TextField(
+    #     analyzer=address_analyzer,
+    #     fields={'raw': fields.KeywordField()}
+    # )
+    location = fields.GeoPoint(lat_lon=True)
 
     class Meta:
         model = Point  # The model associated with this DocType
@@ -33,6 +34,12 @@ class PointDocument(DocType):
         fields = [
             'store_type',
             'identity',
-            'longitude',
-            'latitude'
+            'province',
+            'city',
+            'district',
+            'name',
+            'address',
+            'linkman',
+            'telephone',
+            'service_time',
         ]

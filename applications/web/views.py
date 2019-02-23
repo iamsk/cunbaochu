@@ -4,19 +4,37 @@ from __future__ import unicode_literals
 from django.views.generic import TemplateView
 from rest_framework import generics
 
-from applications.crawler.models import RawPoint
-from applications.web.serializers import RawPointSerializer
+from applications.web.models import Point
+from applications.web.serializers import PointSerializer
+from applications.web.documents import PointDocument
 
 
 class IndexView(TemplateView):
     template_name = "index.html"
 
 
+class NearByView(TemplateView):
+    template_name = "nearby.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(NearByView, self).get_context_data(**kwargs)
+        context['city'] = self.kwargs.get('city', u'附近')
+        longitude = self.kwargs.get('longitude', '116.232922')
+        latitude = self.kwargs.get('latitude', '39.542637')
+        s = PointDocument.search().filter('geo_distance', distance='10000m',
+                                          location={"lat": longitude, "lon": latitude})
+        a = s.execute()[0]
+        print a
+        print a.address
+        context['points'] = []
+        return context
+
+
 class PointsViewSet(generics.ListAPIView):
-    queryset = RawPoint.objects.filter(status=1)
-    serializer_class = RawPointSerializer
+    queryset = Point.objects.filter(status=1)
+    serializer_class = PointSerializer
 
 
 class PointView(generics.RetrieveAPIView):
-    queryset = RawPoint.objects.filter(status=1)
-    serializer_class = RawPointSerializer
+    queryset = Point.objects.filter(status=1)
+    serializer_class = PointSerializer

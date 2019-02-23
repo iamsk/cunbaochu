@@ -22,6 +22,7 @@ schema_view = get_swagger_view(title='cunbaochu API')
 
 urlpatterns = [
     url(r'^$', views.IndexView.as_view()),
+    url(r'^nearby/$', views.NearByView.as_view()),
     url(r'^search/$', views.PointsViewSet.as_view()),
     url(r'^points/(?P<pk>[0-9]+)/$', views.PointView.as_view()),
     url(r'^admin/', include(admin.site.urls)),

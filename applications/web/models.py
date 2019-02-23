@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import shortuuid
 from django.db import models
+
+from applications.crawler.models import RawPoint
 
 
 class Point(models.Model):
@@ -14,8 +17,9 @@ class Point(models.Model):
         (0, u'禁用'),
         (1, u'正常'),
     )
+    raw_point = models.ForeignKey(RawPoint)
     store_type = models.SmallIntegerField(choices=STORE_TYPES, default=1)
-    identity = models.CharField(max_length=100, help_text=u'唯一标识')
+    identity = models.CharField(max_length=100, help_text=u'唯一标识', default=shortuuid.uuid)
     province = models.CharField(max_length=50, help_text=u'省')
     city = models.CharField(max_length=50, help_text=u'市')
     district = models.CharField(max_length=50, help_text=u'区')
@@ -32,4 +36,4 @@ class Point(models.Model):
         return '{}:{}:{}:{}'.format(self.store_type, self.identity, self.name, self.address)
 
     class Meta:
-        unique_together = (('identity',),)
+        unique_together = (('identity',), ('raw_point',))
