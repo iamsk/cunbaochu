@@ -44,8 +44,7 @@ def request(location):
     }
     payload = "address=&type=1&lat={}&lng={}&storeType=&keyword=".format('%.6f' % location['lat'],
                                                                          '%.6f' % location['lng'])
-    url = point_list_url.format()
-    data = requests.post(url, data=payload, headers=headers, params=params).json()
+    data = requests.post(point_list_url, data=payload, headers=headers, params=params).json()
     return data
 
 
@@ -54,7 +53,7 @@ def command():
     data = requests.get(area_list_url).json()
     area_list = data['keywordData']
     for area in area_list:
-        address = u'{}{}{}'.format(area['provincename'], area['cityname'], area['countyname'])
+        address = u'{}{}{}政府'.format(area['provincename'], area['cityname'], area['countyname'])
         location = get_lan_lat(address)
         data = request(location)
         point_list = data['data']
