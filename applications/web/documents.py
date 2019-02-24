@@ -46,3 +46,6 @@ class PointDocument(DocType):
             'telephone',
             'service_time',
         ]
+
+        ignore_signals = True
+        auto_refresh = False

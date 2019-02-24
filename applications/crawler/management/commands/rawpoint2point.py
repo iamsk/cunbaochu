@@ -10,6 +10,8 @@ from applications.web.models import Point
 def command():
     raw_points = RawPoint.objects.filter(status=1)
     for raw_point in raw_points:
+        if not raw_point.address or len(raw_point.address) == 0:
+            continue
         data = json.loads(raw_point.raw_data)
         p, created = Point.objects.get_or_create(raw_point=raw_point)
         if created:
