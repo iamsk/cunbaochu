@@ -35,6 +35,20 @@ def get_lan_lat(address):
     return requests.get(api).json()['result']['location']
 
 
+def request(location):
+    # params = {'address': '', 'type': 1, 'lat': location['lat'], 'lng': location['lng'], 'storeType': '',
+    #           'keyword': ''}
+    params = {"_": int(time.time() * 1000)}
+    headers = {
+        'Content-Type': "application/x-www-form-urlencoded",
+    }
+    payload = "address=&type=1&lat={}&lng={}&storeType=&keyword=".format('%.6f' % location['lat'],
+                                                                         '%.6f' % location['lng'])
+    url = point_list_url.format()
+    data = requests.post(url, data=payload, headers=headers, params=params).json()
+    return data
+
+
 @click.command()
 def command():
     data = requests.get(area_list_url).json()
@@ -42,9 +56,7 @@ def command():
     for area in area_list:
         address = u'{}{}{}'.format(area['provincename'], area['cityname'], area['countyname'])
         location = get_lan_lat(address)
-        params = {'address': '', 'type': 1, 'lat': location['lat'], 'lng': location['lng'], 'storeType': '',
-                  'keyword': ''}
-        data = requests.post(point_list_url.format(int(time.time() * 1000)), params).json()
+        data = request(location)
         point_list = data['data']
         print address, len(point_list) if point_list else 0
         if not point_list:
