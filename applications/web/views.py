@@ -19,8 +19,8 @@ class NearByView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(NearByView, self).get_context_data(**kwargs)
         context['city'] = self.request.GET.get('city', u'附近')
-        longitude = self.request.GET.get('longitude', '116.232922')
-        latitude = self.request.GET.get('latitude', '39.542637')
+        longitude = self.request.GET.get('longitude', '116.344251')
+        latitude = self.request.GET.get('latitude', '40.034957')
         location = {"lat": latitude, "lon": longitude}
         s = PointDocument.search().sort(
             {"_geo_distance": {

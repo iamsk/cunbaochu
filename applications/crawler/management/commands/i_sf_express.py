@@ -46,6 +46,7 @@ def command():
                 continue
             p, created = RawPoint.objects.get_or_create(source=1, identity=point['code'])
             if created:
+                print point['address']
                 p.address = point['address']
                 p.raw_data = json.dumps(point)
                 p.save()
