@@ -158,3 +158,17 @@
     </div>
   </section>
 {% endblock %}
+{% block js %}
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=BR1ICrFXBaTe1qOKDXuVVWTQYuA51hII"></script>
+<script type="text/javascript">
+	var geolocation = new BMap.Geolocation();
+	geolocation.getCurrentPosition(function(r){
+		if(this.getStatus() == BMAP_STATUS_SUCCESS){
+			console.log('您的位置：'+r.point.lng+','+r.point.lat);
+		}
+		else {
+			console.log('failed'+this.getStatus());
+		}
+	},{enableHighAccuracy: true})
+</script>
+{% endblock %}
