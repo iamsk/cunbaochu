@@ -19,7 +19,7 @@ class RawPoint(models.Model):
     status = models.SmallIntegerField(choices=STATUSES, default=1)
 
     def __unicode__(self):
-        return '{}:{}:{}'.format(self.source, self.identity, self.address)
+        return '{}:{}'.format(self.source, self.identity)
 
     class Meta:
         unique_together = (('source', 'identity'),)
