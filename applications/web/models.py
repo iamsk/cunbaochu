@@ -33,7 +33,7 @@ class Point(models.Model):
     status = models.SmallIntegerField(choices=STATUSES, default=1)
 
     def __unicode__(self):
-        return '{}:{}:{}:{}'.format(self.store_type, self.identity, self.name, self.address)
+        return '{}:{}:{}'.format(self.store_type, self.identity, self.name)
 
     class Meta:
         unique_together = (('identity',), ('raw_point',))
