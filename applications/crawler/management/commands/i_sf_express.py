@@ -12,7 +12,7 @@ a = {"keywordData": [{"keyword": "东城区", "countyname": "东城区", "county
                       "provincename": "北京市", "provinceid": "010", "showtext": "北京市 北京市 东城区", "country_code": "CN",
                       "lang_code": "sc", "id": None, "createTm": None, "modifiedTm": None}, ]}
 
-point_list_url = 'https://i.sf-express.com/service/new/commonquery/queryNearlyStore?_=1550587844255'
+point_list_url = 'https://i.sf-express.com/service/new/commonquery/queryNearlyStore?_={}'
 
 # address: 北京市北京市西城区西城区
 # type: 1
@@ -42,9 +42,9 @@ def command():
     for area in area_list:
         address = u'{}{}{}'.format(area['provincename'], area['cityname'], area['countyname'])
         location = get_lan_lat(address)
-        params = {'address': '', 'type': 1, 'lat': location['lat'], 'lng': location['lng'], 'storeType': '3,1,2,4,5',
+        params = {'address': '', 'type': 1, 'lat': location['lat'], 'lng': location['lng'], 'storeType': '',
                   'keyword': ''}
-        data = requests.post(point_list_url, params).json()
+        data = requests.post(point_list_url.format(int(time.time() * 1000)), params).json()
         point_list = data['data']
         print address, len(point_list) if point_list else 0
         if not point_list:
