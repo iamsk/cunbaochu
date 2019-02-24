@@ -29,13 +29,21 @@ b = {"data": [{"address": "北京市北京市西城区西城区", "name": None, 
               ], "code": "ok", "success": True}
 
 
+def get_lan_lat(address):
+    ak = '3dd08864e4ced5da7d6004e46e26502d'
+    api = u"http://api.map.baidu.com/geocoder/v2/?address={}&output=json&ak={}".format(address, ak)
+    return requests.get(api).json()['result']['location']
+
+
 @click.command()
 def command():
     data = requests.get(area_list_url).json()
     area_list = data['keywordData']
     for area in area_list:
         address = u'{}{}{}'.format(area['provincename'], area['cityname'], area['countyname'])
-        params = {'address': address, 'type': 1, 'lat': None, 'lng': None, 'storeType': '3,1,2,4,5', 'keyword': ''}
+        location = get_lan_lat(address)
+        params = {'address': '', 'type': 1, 'lat': location['lat'], 'lng': location['lng'], 'storeType': '3,1,2,4,5',
+                  'keyword': ''}
         data = requests.post(point_list_url, params).json()
         point_list = data['data']
         print address, len(point_list) if point_list else 0
@@ -46,7 +54,6 @@ def command():
                 continue
             p, created = RawPoint.objects.get_or_create(source=1, identity=point['code'])
             if created:
-                print point['address']
                 p.address = point['address']
                 p.raw_data = json.dumps(point)
                 p.save()
