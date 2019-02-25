@@ -5,3 +5,4 @@ env
 !static/img
 !static/device-mockups
 static/*
+db.sqlite3
