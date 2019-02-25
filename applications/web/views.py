@@ -30,7 +30,7 @@ class NearByView(TemplateView):
             }}
         )
         points = s.execute()
-        context['points'] = points
+        context['points'] = points[:20]
         return context
 
 

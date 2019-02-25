@@ -1,8 +1,7 @@
 *.pyc
 env
-!static/css
-!static/js
-!static/img
-!static/device-mockups
-static/*
+static/admin
+static/django_extensions
+static/rest_framework
+static/rest_framework_swagger
 db.sqlite3
