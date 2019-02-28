@@ -13,11 +13,36 @@ class IndexView(TemplateView):
     template_name = "index.html"
 
 
-class NearByView(TemplateView):
+class POIView(TemplateView):
     template_name = "nearby.html"
 
     def get_context_data(self, **kwargs):
-        context = super(NearByView, self).get_context_data(**kwargs)
+        context = super(POIView, self).get_context_data(**kwargs)
+        context['city'] = self.request.GET.get('city', u'附近')
+        longitude = self.request.GET.get('longitude', '116.344251')
+        latitude = self.request.GET.get('latitude', '40.034957')
+        location = {"lat": latitude, "lon": longitude}
+        s = PointDocument.search().sort(
+            {"_geo_distance": {
+                'location': location,
+                "order": "asc",
+                "unit": "km"
+            }}
+        )
+        points = s.execute()
+        context['points'] = points[:20]
+        return context
+
+
+class NearByView(TemplateView):
+    template_name = "nearby.html"
+
+
+class NearByPointsView(TemplateView):
+    template_name = "points.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(NearByPointsView, self).get_context_data(**kwargs)
         context['city'] = self.request.GET.get('city', u'附近')
         longitude = self.request.GET.get('longitude', '116.344251')
         latitude = self.request.GET.get('latitude', '40.034957')
