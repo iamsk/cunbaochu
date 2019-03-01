@@ -1,28 +1,16 @@
-  <section id="cities">
-    <!-- Page Content -->
-    <div class="container">
-
-      <h1 class="font-weight-light text-center mt-4 mb-0">{{ city }}</h1>
-
-      <hr class="mt-2 mb-5">
-
-      <div class="row text-center">
-        {% for point in points %}
-        <div class="col-lg-6 col-md-6 col-12">
-          <!--<img class="img-fluid img-thumbnail" src="https://source.unsplash.com/pWkk7iiCoDM/400x20" alt="">-->
-          <p style="text-align: left!important">
-            <span>{{ point.name }}</span><br>
-            <span>{{ point.address }}</span><br>
-            <!--联系人：<span>{{ point.linkman }}</span><br>-->
-            <!--联系电话：<span>{{ point.telephone }}</span><br>-->
-            服务时间：<span>{% if point.service_time %}{{ point.service_time }}{% else %}全天{% endif %}</span><br>
-            <span>距离当前位置{{ point.meta.sort.0|floatformat:-2 }}千米</span><br>
-            <a href="">导航</a>
-          </p>
-        </div>
-        {% endfor %}
-      </div>
-
+  <div class="row text-center" id="points">
+    {% for point in points %}
+    <div class="col-lg-6 col-md-6 col-12">
+      <!--<img class="img-fluid img-thumbnail" src="https://source.unsplash.com/pWkk7iiCoDM/400x20" alt="">-->
+      <p style="text-align: left!important">
+        <span>{{ point.name }}</span><br>
+        <span>{{ point.address }}</span><br>
+        <!--联系人：<span>{{ point.linkman }}</span><br>-->
+        <!--联系电话：<span>{{ point.telephone }}</span><br>-->
+        服务时间：<span>{% if point.service_time %}{{ point.service_time }}{% else %}全天{% endif %}</span><br>
+        <span>距离当前位置{{ point.meta.sort.0|floatformat:-2 }}千米</span><br>
+        <a href="">导航</a>
+      </p>
     </div>
-    <!-- /.container -->
-  </section>
+    {% endfor %}
+  </div>

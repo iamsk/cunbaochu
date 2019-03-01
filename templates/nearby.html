@@ -31,7 +31,14 @@ header.masthead {
       </div>
     </div>
   </header>
-  <section id="cities">
+    <section>
+    <!-- Page Content -->
+    <div class="container">
+      <h1 class="font-weight-light text-center mt-4 mb-0">{{ city }}</h1>
+      <hr class="mt-2 mb-5">
+      <div class="row text-center" id="points"></div>
+    </div>
+    <!-- /.container -->
   </section>
 {% endblock %}
 {% block js %}
@@ -51,13 +58,13 @@ header.masthead {
                 dataType: "html",
                 success: function (data) {
                     console.log('数据：' + data);
-                    $('#cities').html(data);
+                    $('#points').html(data);
                 }
             });
 		}
 		else {
 			console.log('failed' + this.getStatus());
-			$('#cities').html('附近无存包处');
+			$('#cities').html('附近暂无存包处！');
 		}
 	},{enableHighAccuracy: true})
 </script>

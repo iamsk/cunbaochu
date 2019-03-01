@@ -18,7 +18,7 @@ class POIView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(POIView, self).get_context_data(**kwargs)
-        context['city'] = self.request.GET.get('city', u'附近')
+        context['city'] = self.request.GET.get('city', u'北京')
         longitude = self.request.GET.get('longitude', '116.344251')
         latitude = self.request.GET.get('latitude', '40.034957')
         location = {"lat": latitude, "lon": longitude}
@@ -37,13 +37,17 @@ class POIView(TemplateView):
 class NearByView(TemplateView):
     template_name = "nearby.html"
 
+    def get_context_data(self, **kwargs):
+        context = super(NearByView, self).get_context_data(**kwargs)
+        context['city'] = self.request.GET.get('city', u'附近')
+        return context
+
 
 class NearByPointsView(TemplateView):
     template_name = "points.html"
 
     def get_context_data(self, **kwargs):
         context = super(NearByPointsView, self).get_context_data(**kwargs)
-        context['city'] = self.request.GET.get('city', u'附近')
         longitude = self.request.GET.get('longitude', '116.344251')
         latitude = self.request.GET.get('latitude', '40.034957')
         location = {"lat": latitude, "lon": longitude}
