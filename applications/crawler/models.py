@@ -7,6 +7,7 @@ from django.db import models
 class RawPoint(models.Model):
     SOURCES = (
         (1, 'i.sf-express.com'),
+        (2, 'submit'),
     )
     STATUSES = (
         (0, u'禁用'),
