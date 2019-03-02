@@ -72,7 +72,7 @@ class PointMixin(object):
                 'location': location,
                 "order": "asc",
                 "unit": "km"
-            }}[:20]
+            }}
         )
         points = s.to_queryset()
         return points
