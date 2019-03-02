@@ -63,9 +63,29 @@ class NearByPointsView(TemplateView):
         return context
 
 
-class PointsViewSet(generics.ListAPIView):
+class PointMixin(object):
+    @classmethod
+    def get_points_by_lon_lat(cls, lon, lat):
+        location = {"lat": lat, "lon": lon}
+        s = PointDocument.search().sort(
+            {"_geo_distance": {
+                'location': location,
+                "order": "asc",
+                "unit": "km"
+            }}[:20]
+        )
+        points = s.to_queryset()
+        return points
+
+
+class SearchView(PointMixin, generics.ListAPIView):
     queryset = Point.objects.filter(status=1)
     serializer_class = PointSerializer
+
+    def get_queryset(self):
+        lon = self.request.GET.get('longitude', '116.344251')
+        lat = self.request.GET.get('latitude', '40.034957')
+        return self.get_points_by_lon_lat(lon, lat)
 
 
 class PointView(generics.RetrieveAPIView):

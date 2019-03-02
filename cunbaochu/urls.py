@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^pois/$', views.NearByView.as_view()),
     url(r'^nearby/$', views.NearByView.as_view()),
     url(r'^nearby-points/$', views.NearByPointsView.as_view()),
-    url(r'^search/$', views.PointsViewSet.as_view()),
+    url(r'^search/$', views.SearchView.as_view()),
     url(r'^points/(?P<pk>[0-9]+)/$', views.PointView.as_view()),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^docs/$', schema_view)
