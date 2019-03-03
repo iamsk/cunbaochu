@@ -34,7 +34,7 @@ header.masthead {
     <section>
     <!-- Page Content -->
     <div class="container">
-      <h1 class="font-weight-light text-center mt-4 mb-0">{{ city }}</h1>
+      <h1 class="font-weight-light text-center mt-4 mb-0">附近</h1>
       <hr class="mt-2 mb-5">
       <div class="row text-center" id="points"></div>
     </div>
@@ -42,18 +42,56 @@ header.masthead {
   </section>
 {% endblock %}
 {% block js %}
-<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=BR1ICrFXBaTe1qOKDXuVVWTQYuA51hII"></script>
+<!--<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=BR1ICrFXBaTe1qOKDXuVVWTQYuA51hII"></script>-->
+<!--<script type="text/javascript">-->
+	<!--var geolocation = new BMap.Geolocation(coord_type='gcj20');-->
+	<!--geolocation.getCurrentPosition(function(r){-->
+		<!--if(this.getStatus() == BMAP_STATUS_SUCCESS){-->
+			<!--console.log('您的位置：' + r.point.lng + ',' + r.point.lat);-->
+			<!--$.ajax({-->
+                <!--type: "GET",-->
+                <!--url: "/nearby-points/",-->
+                <!--data: {-->
+                    <!--'longitude': r.point.lng,-->
+                    <!--'latitude': r.point.lat-->
+                <!--},-->
+                <!--dataType: "html",-->
+                <!--success: function (data) {-->
+                    <!--console.log('数据：' + data);-->
+                    <!--$('#points').html(data);-->
+                <!--}-->
+            <!--});-->
+		<!--}-->
+		<!--else {-->
+			<!--$('#points').html('附近暂无存包处！');-->
+		<!--}-->
+	<!--},{enableHighAccuracy: true})-->
+<!--</script>-->
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.13&key=377132d878695a67d528ba75f5a3200b"></script>
 <script type="text/javascript">
-	var geolocation = new BMap.Geolocation();
-	geolocation.getCurrentPosition(function(r){
-		if(this.getStatus() == BMAP_STATUS_SUCCESS){
-			console.log('您的位置：' + r.point.lng + ',' + r.point.lat);
+    AMap.plugin('AMap.Geolocation', function() {
+        var geolocation = new AMap.Geolocation({
+            enableHighAccuracy: true,//是否使用高精度定位，默认:true
+            timeout: 5000,          //超过10秒后停止定位，默认：5s
+
+        });
+        geolocation.getCurrentPosition(function(status,result){
+            if(status=='complete'){
+                onComplete(result)
+            }else{
+                onError(result)
+            }
+        });
+    });
+    //解析定位结果
+    function onComplete(data) {
+        console.log('您的位置：' + data.position.lng + ',' + data.position.lat);
 			$.ajax({
                 type: "GET",
                 url: "/nearby-points/",
                 data: {
-                    'longitude': r.point.lng,
-                    'latitude': r.point.lat
+                    'longitude': data.position.lng,
+                    'latitude': data.position.lat
                 },
                 dataType: "html",
                 success: function (data) {
@@ -61,11 +99,10 @@ header.masthead {
                     $('#points').html(data);
                 }
             });
-		}
-		else {
-			console.log('failed' + this.getStatus());
-			$('#cities').html('附近暂无存包处！');
-		}
-	},{enableHighAccuracy: true})
+    }
+    //解析定位错误信息
+    function onError(data) {
+        $('#points').html('附近暂无存包处！');
+    }
 </script>
 {% endblock %}

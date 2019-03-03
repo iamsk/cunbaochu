@@ -13,60 +13,6 @@ from applications.web.documents import PointDocument
 from applications.crawler.models import RawPoint
 
 
-class IndexView(TemplateView):
-    template_name = "index.html"
-
-
-class POIView(TemplateView):
-    template_name = "nearby.html"
-
-    def get_context_data(self, **kwargs):
-        context = super(POIView, self).get_context_data(**kwargs)
-        context['city'] = self.request.GET.get('city', u'北京')
-        longitude = self.request.GET.get('longitude', '116.344251')
-        latitude = self.request.GET.get('latitude', '40.034957')
-        location = {"lat": latitude, "lon": longitude}
-        s = PointDocument.search().sort(
-            {"_geo_distance": {
-                'location': location,
-                "order": "asc",
-                "unit": "km"
-            }}
-        )
-        points = s.execute()
-        context['points'] = points[:20]
-        return context
-
-
-class NearByView(TemplateView):
-    template_name = "nearby.html"
-
-    def get_context_data(self, **kwargs):
-        context = super(NearByView, self).get_context_data(**kwargs)
-        context['city'] = self.request.GET.get('city', u'附近')
-        return context
-
-
-class NearByPointsView(TemplateView):
-    template_name = "points.html"
-
-    def get_context_data(self, **kwargs):
-        context = super(NearByPointsView, self).get_context_data(**kwargs)
-        longitude = self.request.GET.get('longitude', '116.344251')
-        latitude = self.request.GET.get('latitude', '40.034957')
-        location = {"lat": latitude, "lon": longitude}
-        s = PointDocument.search().sort(
-            {"_geo_distance": {
-                'location': location,
-                "order": "asc",
-                "unit": "km"
-            }}
-        )
-        points = s.execute()
-        context['points'] = points[:20]
-        return context
-
-
 class PointMixin(object):
     @classmethod
     def get_points_by_lon_lat(cls, lon, lat):
@@ -86,6 +32,37 @@ class PointMixin(object):
         return _points
 
 
+class IndexView(TemplateView):
+    template_name = "index.html"
+
+
+class POIView(PointMixin, TemplateView):
+    template_name = "nearby.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(POIView, self).get_context_data(**kwargs)
+        context['city'] = self.request.GET.get('city', u'北京')
+        lon = self.request.GET.get('longitude', '116.344251')
+        lat = self.request.GET.get('latitude', '40.034957')
+        context['points'] = self.get_points_by_lon_lat(lon, lat)
+        return context
+
+
+class NearByView(TemplateView):
+    template_name = "nearby.html"
+
+
+class NearByPointsView(PointMixin, TemplateView):
+    template_name = "points.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(NearByPointsView, self).get_context_data(**kwargs)
+        lon = self.request.GET.get('longitude', '116.344251')
+        lat = self.request.GET.get('latitude', '40.034957')
+        context['points'] = self.get_points_by_lon_lat(lon, lat)
+        return context
+
+
 class SearchView(PointMixin, generics.ListAPIView):
     queryset = Point.objects.filter(status=1)
     serializer_class = PointSerializer
@@ -101,8 +78,8 @@ class PointsView(generics.CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         data = request.data
-        p, created = RawPoint.objects.get_or_create(source=2, identity='{},{}'.format(data['longitude'],
-                                                                                      data['latitude']))
+        p, created = RawPoint.objects.get_or_create(source=2,
+                                                    identity='{},{}'.format(data['longitude'], data['latitude']))
         if created:
             p.address = data['address']
             p.raw_data = json.dumps(data)

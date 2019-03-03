@@ -15,6 +15,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from rest_framework_swagger.views import get_swagger_view
+from django.conf import settings
 
 from applications.web import views
 
@@ -25,8 +26,14 @@ urlpatterns = [
     url(r'^pois/$', views.NearByView.as_view()),
     url(r'^nearby/$', views.NearByView.as_view()),
     url(r'^nearby-points/$', views.NearByPointsView.as_view()),
+    # API
     url(r'^search/$', views.SearchView.as_view()),
     url(r'^points/$', views.PointsView.as_view()),
+    # management
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^docs/$', schema_view)
 ]
+
+if settings.DEBUG:
+    urlpatterns += [
+        url(r'^docs/$', schema_view)
+    ]

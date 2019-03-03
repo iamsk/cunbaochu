@@ -8,8 +8,8 @@
         <!--联系人：<span>{{ point.linkman }}</span><br>-->
         <!--联系电话：<span>{{ point.telephone }}</span><br>-->
         服务时间：<span>{% if point.service_time %}{{ point.service_time }}{% else %}全天{% endif %}</span><br>
-        <span>距离当前位置{{ point.meta.sort.0|floatformat:-2 }}千米</span><br>
-        <a href="">导航</a>
+        <!--<span>距离当前位置{{ point.meta.sort.0|floatformat:-2 }}千米</span><br>-->
+        <a href="https://uri.amap.com/marker?position={{ point.longitude }},{{ point.latitude }}&name={{ point.name }}&src=cunbaochu.com">导航</a>
       </p>
     </div>
     {% endfor %}
