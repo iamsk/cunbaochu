@@ -37,3 +37,20 @@ class Point(models.Model):
 
     class Meta:
         unique_together = (('identity',), ('raw_point',))
+
+
+class POI(models.Model):
+    STATUSES = (
+        (0, u'禁用'),
+        (1, u'正常'),
+    )
+    city = models.CharField(max_length=50, help_text=u'市')
+    name = models.CharField(max_length=100, help_text=u'名称')
+    longitude = models.CharField(max_length=100, help_text=u'经度')
+    latitude = models.CharField(max_length=100, help_text=u'纬度')
+    image = models.CharField(max_length=200, help_text=u'地址图片')
+    order = models.IntegerField(help_text=u'排序', default=100)
+    status = models.SmallIntegerField(choices=STATUSES, default=1)
+
+    def __unicode__(self):
+        return '{}:{}'.format(self.city, self.name)

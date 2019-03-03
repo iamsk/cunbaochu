@@ -3,11 +3,12 @@ from __future__ import unicode_literals
 
 import json
 from django.views.generic import TemplateView
+from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
 
-from applications.web.models import Point
+from applications.web.models import Point, POI
 from applications.web.serializers import PointSerializer, PointCreateSerializer
 from applications.web.documents import PointDocument
 from applications.crawler.models import RawPoint
@@ -35,16 +36,21 @@ class PointMixin(object):
 class IndexView(TemplateView):
     template_name = "index.html"
 
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['pois'] = POI.objects.all()
+        return context
+
 
 class POIView(PointMixin, TemplateView):
-    template_name = "nearby.html"
+    template_name = "poi.html"
 
     def get_context_data(self, **kwargs):
         context = super(POIView, self).get_context_data(**kwargs)
-        context['city'] = self.request.GET.get('city', u'北京')
-        lon = self.request.GET.get('longitude', '116.344251')
-        lat = self.request.GET.get('latitude', '40.034957')
-        context['points'] = self.get_points_by_lon_lat(lon, lat)
+        pk = self.request.GET.get('pk', 1)
+        poi = get_object_or_404(POI, id=pk)
+        context['poi'] = poi
+        context['points'] = self.get_points_by_lon_lat(poi.longitude, poi.latitude)
         return context
 
 
