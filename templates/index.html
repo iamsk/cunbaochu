@@ -32,16 +32,16 @@
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-6">
-            <img class="img-fluid d-block mx-auto" src="https://blackrockdigital.github.io/startbootstrap-agency/img/logos/envato.jpg" alt="">
+            <img class="img-fluid d-block mx-auto" src="/static/img/partners/sf-200x50.png" alt="顺丰">
         </div>
         <div class="col-md-3 col-sm-6">
-            <img class="img-fluid d-block mx-auto" src="https://blackrockdigital.github.io/startbootstrap-agency/img/logos/envato.jpg" alt="">
+            <img class="img-fluid d-block mx-auto" src="/static/img/partners/walmart-200x50.png" alt="沃尔玛">
         </div>
         <div class="col-md-3 col-sm-6">
-            <img class="img-fluid d-block mx-auto" src="https://blackrockdigital.github.io/startbootstrap-agency/img/logos/envato.jpg" alt="">
+            <img class="img-fluid d-block mx-auto" src="/static/img/partners/jd-200x50.png" alt="京东">
         </div>
         <div class="col-md-3 col-sm-6">
-            <img class="img-fluid d-block mx-auto" src="https://blackrockdigital.github.io/startbootstrap-agency/img/logos/envato.jpg" alt="">
+            <img class="img-fluid d-block mx-auto" src="/static/img/partners/zhongan-200x50.png" alt="众安保险">
         </div>
       </div>
     </div>
@@ -59,10 +59,14 @@
         {% for poi in pois %}
         <div class="col-lg-3 col-md-4 col-6">
           <a href="/pois/{{ poi.id }}" class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" src="{{ poi.image }}" alt="{{ poi.name }}">
+            <img class="img-fluid img-thumbnail" src="{{ poi.image }}" alt="{{ poi.name }}">
+            <div class="carousel-caption">
+              <h4>{{ poi.city }}&middot;{{ poi.name }}</h4>
+            </div>
           </a>
         </div>
         {% endfor %}
+      </div>
 
     </div>
     <!-- /.container -->
@@ -72,16 +76,16 @@
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-6">
-            <img class="img-fluid d-block mx-auto" src="https://blackrockdigital.github.io/startbootstrap-agency/img/logos/envato.jpg" alt="">
+            <img class="img-fluid d-block mx-auto" src="/static/img/news/tencent-200x50.png" alt="腾讯">
         </div>
         <div class="col-md-3 col-sm-6">
-            <img class="img-fluid d-block mx-auto" src="https://blackrockdigital.github.io/startbootstrap-agency/img/logos/envato.jpg" alt="">
+            <img class="img-fluid d-block mx-auto" src="/static/img/news/toutiao-200x50.png" alt="今日头条">
         </div>
         <div class="col-md-3 col-sm-6">
-            <img class="img-fluid d-block mx-auto" src="https://blackrockdigital.github.io/startbootstrap-agency/img/logos/envato.jpg" alt="">
+            <img class="img-fluid d-block mx-auto" src="/static/img/news/qunar-200x50.png" alt="去哪儿">
         </div>
         <div class="col-md-3 col-sm-6">
-            <img class="img-fluid d-block mx-auto" src="https://blackrockdigital.github.io/startbootstrap-agency/img/logos/envato.jpg" alt="">
+            <img class="img-fluid d-block mx-auto" src="/static/img/news/hongshu-200x50.png" alt="小红书">
         </div>
       </div>
     </div>
