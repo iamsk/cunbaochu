@@ -38,7 +38,7 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['pois'] = POI.objects.all()
+        context['pois'] = POI.objects.filter(status=1).order_by('order')
         return context
 
 
