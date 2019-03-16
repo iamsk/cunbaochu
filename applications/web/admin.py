@@ -11,7 +11,7 @@ class PointAdmin(admin.ModelAdmin):
 
 
 class PoiAdmin(admin.ModelAdmin):
-    list_display = ('city', 'name', 'order', 'status')
+    list_display = ('name', 'city', 'order', 'longitude', 'latitude', 'status')
 
 
 admin.site.register(Point, PointAdmin)

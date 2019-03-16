@@ -47,7 +47,7 @@ class POIView(PointMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(POIView, self).get_context_data(**kwargs)
-        pk = self.request.GET.get('pk', 1)
+        pk = kwargs.get('pk', 1)
         poi = get_object_or_404(POI, id=pk)
         context['poi'] = poi
         context['points'] = self.get_points_by_lon_lat(poi.longitude, poi.latitude)
