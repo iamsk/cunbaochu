@@ -8,3 +8,5 @@ newrelic
 elasticsearch-dsl>=6.0,<6.2
 django-elasticsearch-dsl
 shortuuid
+jsonfield==2.0.2
+git+ssh://git@github.com/bastionhost/django-admin-json-editor.git
