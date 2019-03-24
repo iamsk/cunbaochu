@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from rest_framework import serializers
 
 from applications.web.models import Point
+from applications.crawler.models import SubmittedPoint
 
 
 class PointSerializer(serializers.ModelSerializer):
@@ -24,13 +25,7 @@ class PointSerializer(serializers.ModelSerializer):
         ]
 
 
-class PointCreateSerializer(serializers.Serializer):
-    store_type = serializers.IntegerField()
-    name = serializers.CharField()
-    address = serializers.CharField()
-    longitude = serializers.CharField()
-    latitude = serializers.CharField()
-    linkman = serializers.CharField()
-    telephone = serializers.CharField()
-    service_time = serializers.CharField()
-    images = serializers.CharField()
+class PointCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SubmittedPoint
+        fields = '__all__'
