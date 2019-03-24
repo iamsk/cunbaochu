@@ -47,5 +47,5 @@ class PointDocument(DocType):
             'service_time',
         ]
 
-        ignore_signals = True
-        auto_refresh = False
+        ignore_signals = False
+        auto_refresh = True
