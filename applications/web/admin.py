@@ -7,7 +7,7 @@ from .models import Point, POI
 
 
 class PointAdmin(admin.ModelAdmin):
-    list_display = ('identity', 'name', 'store_type', 'address', 'status')
+    list_display = ('id', 'identity', 'name', 'store_type', 'address', 'status')
 
 
 class PoiAdmin(admin.ModelAdmin):
