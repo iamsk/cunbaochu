@@ -1,17 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import json
 from django.views.generic import TemplateView
 from django.shortcuts import get_object_or_404
 from rest_framework import generics
-from rest_framework.response import Response
-from rest_framework import status
 
 from applications.web.models import Point, POI
 from applications.web.serializers import PointSerializer, PointCreateSerializer
 from applications.web.documents import PointDocument
-from applications.crawler.models import RawPoint
+from applications.crawler.models import SubmittedPoint
 
 
 class PointMixin(object):
@@ -81,13 +78,4 @@ class SearchView(PointMixin, generics.ListAPIView):
 
 class PointsView(generics.CreateAPIView):
     serializer_class = PointCreateSerializer
-
-    def create(self, request, *args, **kwargs):
-        data = request.data
-        p, created = RawPoint.objects.get_or_create(source=2,
-                                                    identity='{},{}'.format(data['longitude'], data['latitude']))
-        if created:
-            p.address = data['address']
-            p.raw_data = json.dumps(data)
-            p.save()
-        return Response(data, status=status.HTTP_201_CREATED)
+    model_class = SubmittedPoint

@@ -25,10 +25,12 @@ class PointSerializer(serializers.ModelSerializer):
 
 
 class PointCreateSerializer(serializers.Serializer):
+    store_type = serializers.IntegerField()
     name = serializers.CharField()
     address = serializers.CharField()
     longitude = serializers.CharField()
     latitude = serializers.CharField()
-    service_time = serializers.CharField()
     linkman = serializers.CharField()
     telephone = serializers.CharField()
+    service_time = serializers.CharField()
+    images = serializers.CharField()
