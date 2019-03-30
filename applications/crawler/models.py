@@ -8,6 +8,7 @@ class RawPoint(models.Model):
     SOURCES = (
         (1, 'i.sf-express.com'),
         (2, 'submit'),
+        (3, 'cunzj.com'),
     )
     STATUSES = (
         (0, u'禁用'),
