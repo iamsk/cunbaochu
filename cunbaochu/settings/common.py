@@ -87,7 +87,7 @@ DATABASES = {
         'NAME': 'cunbaochu',
         'USER': 'cunbaochu',
         'PASSWORD': '11235811',
-        'HOST': 'cunbaochu.ceio8cyllle0.ap-southeast-1.rds.amazonaws.com',
+        'HOST': 'cunbaochu.cgqokhle4ek0.ap-southeast-1.rds.amazonaws.com',
         'PORT': '3306',
         'OPTIONS': {
         },
