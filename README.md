@@ -1,26 +1,22 @@
+# 存包处
 
+### 项目包含以下几个模块
 
-# cunbaochu
+* web (官网页面、小程序API接口、数据管理后台)
+* crawler (数据采集)
 
-This project has the following basic applications:
+### 部署方式
 
-* App1 (short desc)
-* App2 (short desc)
-* App3 (short desc)
+* 构建虚拟环境
 
-## Installation
+    `virtualenv env`
 
-To set up a development environment quickly, install Python 2.x first. It
-comes with virtualenv built-in. so create a virtual environment with:
+    `source env/bin/activate`
 
-`virtualenv env`
+* 安装依赖
 
-`source env/bin/activate`
+    `pip install -r requirements.txt`
 
-Install dependencies:
+* 运行服务
 
-`pip install -r requirements.txt`
-
-Run server:
-
-`python manage.py runserver --settings=cunbaochu.settings.dev`
+    `python manage.py runserver --settings=cunbaochu.settings.dev`
