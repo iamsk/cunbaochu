@@ -120,6 +120,6 @@ STATIC_URL = '/static/'
 
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': 'https://search-cunbaochu-po2sbnoo2bqqifuxbqkyysrixa.ap-southeast-1.es.amazonaws.com/'
+        'hosts': 'https://vpc-cunbaochu-pyzmkmjzye6gegvvo2vijkqc4m.ap-southeast-1.es.amazonaws.com/'
     },
 }
