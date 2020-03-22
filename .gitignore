@@ -5,4 +5,5 @@ static/django_extensions
 static/rest_framework
 static/rest_framework_swagger
 db.sqlite3
-t.py
+*.pem
+*.key
