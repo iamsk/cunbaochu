@@ -87,7 +87,7 @@ DATABASES = {
         'NAME': 'cunbaochu',
         'USER': 'cunbaochu',
         'PASSWORD': '11235811',
-        'HOST': 'cunbaochu.ceio8cyllle0.ap-southeast-1.rds.amazonaws.com',
+        'HOST': 'cunbaochu.cgqokhle4ek0.ap-southeast-1.rds.amazonaws.com',
         'PORT': '3306',
         'OPTIONS': {
         },
@@ -120,6 +120,6 @@ STATIC_URL = '/static/'
 
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': 'https://search-cunbaochu-po2sbnoo2bqqifuxbqkyysrixa.ap-southeast-1.es.amazonaws.com/'
+        'hosts': 'https://vpc-cunbaochu-pyzmkmjzye6gegvvo2vijkqc4m.ap-southeast-1.es.amazonaws.com/'
     },
 }
