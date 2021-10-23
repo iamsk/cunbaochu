@@ -12,8 +12,11 @@
 
 ### 项目包含以下几个模块
 
-* web (官网页面、小程序API接口、数据管理后台)
-* crawler (数据采集)
+* web
+    * 官网页面 www.cunbaochu.com
+    * 小程序API接口 cbc.wanggezhi.com
+    * 数据管理后台 /admin
+* crawler 数据采集
 
 ### 部署方式
 
